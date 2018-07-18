@@ -46,7 +46,6 @@ def reset_errors():
     app.email_error = ''
 
 
-
 def valid_username(username):
     if username and is_string(username):
         username = str(username)
@@ -64,10 +63,12 @@ def valid_password(password, verify):
         if len(password) >= MIN_CHAR and len(password) <= MAX_CHAR:
             if password == verify:
                 return True
+            else:
+                app.password_error = 'Passwords do not match!'
+                return False
 
-    return False
     app.password_error = 'password needs to be between {} and {} characters.'.format(MIN_CHAR, MAX_CHAR)
-
+    return False
 
 
 def is_string(value):
